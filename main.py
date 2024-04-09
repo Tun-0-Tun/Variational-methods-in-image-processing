@@ -228,13 +228,7 @@ def save_segmented_image(output_image_path, segmented_image, original_image):
     save_mask(output_image_path, segmented_image, original_image)
 
 
-def evaluate_segmentation(output_image_path, ground_truth_mask_path):
-    iou_score = IoU(output_image_path, ground_truth_mask_path)
-    print('IoU: ', iou_score)
-
-
 def snake_segmentation(args):
-    print(args)
     initial_snake = load_initial_snake(args.initial_snake)
     inverse_mat = calculate_inverse_matrix(initial_snake, args.alpha, args.beta, args.tau)
     sigma = 1
@@ -245,8 +239,7 @@ def snake_segmentation(args):
     img = np.array(Image.open(args.input_image), dtype="float64")
     save_segmented_image(args.output_image, segmented_snake, img)
 
-    iou_score = IoU(args.output_image, 'data/coffee_mask.png')
-    print('IoU: ', iou_score)
+    # iou_score = IoU(args.output_image, 'data/coffee_mask.png')
 
 
 def main():
